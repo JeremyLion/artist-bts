@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import spotifyReducer from './spotify'
 
 const rootRedurcer = combineReducers({
-  spotify: spotifyReducer
+  spotifyPlaylist: spotifyReducer
 })
 
 export default rootRedurcer

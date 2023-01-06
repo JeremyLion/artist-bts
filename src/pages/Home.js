@@ -1,21 +1,21 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { fetchData } from "../store/actions/spotify"
+import { fetchPlaylist } from "../store/actions/spotify"
 import * as Spotify from '../components/Spotify'
 
 const Home = () => {
   const dispatch = useDispatch()
-  const { data, error, loading} = useSelector((state) => state.spotify);
+  const { data, error, loading} = useSelector((state) => state.spotifyPlaylist);
 
   useEffect(() => {
     let isFetch = false
       if(!isFetch) {
-        dispatch(fetchData())
+        dispatch(fetchPlaylist())
       }
     return () => {
       isFetch = true
     }
-  }, [])
+  }, [dispatch])
 
   if (loading) {
     return <p>Loading...</p>;
