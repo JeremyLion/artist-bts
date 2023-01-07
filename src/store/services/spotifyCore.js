@@ -41,3 +41,16 @@ export const getPlaylistTracks = (id) => {
     .catch((err) => reject(err))
   })
 }
+
+/**
+ * @description Get Current User Data
+ * @param {}
+ * @returns {object}
+ */
+export const getUser = () => {
+  return new Promise((resolve, reject) => {
+    spotifyCoreApi.get(`/me`)
+    .then((res) => resolve(res.data))
+    .catch((err) => reject(err))
+  })
+}

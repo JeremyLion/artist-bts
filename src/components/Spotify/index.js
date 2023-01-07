@@ -1,5 +1,7 @@
 import PlaylistCard from "./PlaylistCard";
+import TrackList from './TrackList'
 
 export {
-  PlaylistCard
+  PlaylistCard,
+  TrackList
 }

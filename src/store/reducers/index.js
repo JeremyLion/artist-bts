@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
-import spotifyReducer from './spotify'
+import spotifyPlaylistReducer from './spotify/spotifyPlaylistReducer';
+import spotifyPlaylistTrackReducer from './spotify/spotifyPlaylistTracksReducer'
+import spotifyAlbumReducer from './spotify/spotifyAlbumReducer';
 
 const rootRedurcer = combineReducers({
-  spotifyPlaylist: spotifyReducer
+  spotifyPlaylist: spotifyPlaylistReducer,
+  spotifyTrackList: spotifyPlaylistTrackReducer,
+  spotifyAlbum: spotifyAlbumReducer
 })
 
 export default rootRedurcer

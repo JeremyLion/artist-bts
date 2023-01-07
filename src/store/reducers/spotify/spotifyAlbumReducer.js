@@ -1,4 +1,4 @@
-import { FETCH_PLAYLIST_ERROR, FETCH_PLAYLIST_REQUEST, FETCH_PLAYLIST_SUCCESS } from "../constants/spotify/playlistTypes"
+import { FETCH_ALBUM_REQUEST, FETCH_ALBUM_SUCCESS, FETCH_ALBUM_ERROR } from "../../constants/spotify/playlistTypes"
 
 const init = {
   data: [],
@@ -6,17 +6,17 @@ const init = {
   error: null,
 }
 
-const spotifyReducer = (state = init, action) => {
+const spotifyAlbumReducer = (state = init, action) => {
   switch (action.type) {
-    case FETCH_PLAYLIST_REQUEST :
+    case FETCH_ALBUM_REQUEST :
       return {
          ...state, loading: true 
       }
-    case FETCH_PLAYLIST_SUCCESS : 
+    case FETCH_ALBUM_SUCCESS : 
       return {
        ...state, data: action.data, loading: false 
       }
-    case FETCH_PLAYLIST_ERROR : 
+    case FETCH_ALBUM_ERROR : 
       return {
         ...state, error: action.error, loading: false
       }
@@ -25,4 +25,4 @@ const spotifyReducer = (state = init, action) => {
   }
 }
 
-export default spotifyReducer
+export default spotifyAlbumReducer

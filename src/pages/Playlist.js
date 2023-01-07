@@ -1,50 +1,35 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
+import { useParams } from 'react-router-dom'
 import { fetchPlaylistTracks } from '../store/actions/spotify'
+import * as Spotify from '../components/Spotify'
 
 const Playlist = () => {
+
+  const params = useParams();
   
   const dispatch = useDispatch()
-  const { data, error, loading } = useSelector((state) => state.spotifyTracks)
+  const { data, error, loading } = useSelector((state) => state.spotifyTrackList)
 
   useEffect(() => {
-//    dispatch(fetchPlaylistTracks())
-  }, [])
+   dispatch(fetchPlaylistTracks(params.id))
+  }, [dispatch, params.id])
 
-  return (
-    <div>
-      <table className="table-auto w-full text-left">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Song</th>
-            <th>Plays</th>
-            <th>Duration</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-            <td>Malcolm Lockyer</td>
-            <td>1961</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Witchy Woman</td>
-            <td>The Eagles</td>
-            <td>1972</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Shining Star</td>
-            <td>Earth, Wind, and Fire</td>
-            <td>1975</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  )
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  if (data) {
+    return (
+      <div>
+        <Spotify.TrackList data={data} />
+      </div>
+    )
+  }
 }
 
 export default Playlist

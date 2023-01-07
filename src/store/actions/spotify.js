@@ -25,6 +25,19 @@ const fetchTrackFailure = (error) => ({
   error
 })
 
+const fetchUserRequest = () => ({
+  type: SPOTIFY.FETCH_USER_REQUEST
+})
+const fetchUserSuccess = (data) => ({
+  type: SPOTIFY.FETCH_TRACK_SUCCESS,
+  data
+})
+const fetchUserFailure = (error) => ({
+  type: SPOTIFY.FETCH_USER_ERROR,
+  error
+})
+
+
 export const fetchPlaylist = () => {
   return (dispatch) => {
     dispatch(fetchDataRequest());
@@ -38,7 +51,16 @@ export const fetchPlaylistTracks = (id) => {
   return (dispatch) => {
     dispatch(fetchTrackRequest())
     return Spotify.getPlaylistTracks(id)
-    .then((res) => dispatch(fetchTrackSuccess(res)))
-    .catch((err) => dispatch(fetchTrackFailure(err)))
+    .then((res) => dispatch(fetchTrackSuccess(res.items)))
+    .catch((err) => dispatch(fetchTrackFailure(err.message)))
+  }
+}
+
+export const fetchUser = () => {
+  return (dispatch) => {
+    dispatch(fetchUserRequest())
+    return Spotify.getUser()
+    .then((res) => dispatch(fetchUserSuccess(res.items)))
+    .catch((err) => dispatch(fetchUserFailure(err.message)))
   }
 }
