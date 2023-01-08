@@ -29,7 +29,7 @@ const fetchUserRequest = () => ({
   type: SPOTIFY.FETCH_USER_REQUEST
 })
 const fetchUserSuccess = (data) => ({
-  type: SPOTIFY.FETCH_TRACK_SUCCESS,
+  type: SPOTIFY.FETCH_USER_SUCCESS,
   data
 })
 const fetchUserFailure = (error) => ({
@@ -60,7 +60,7 @@ export const fetchUser = () => {
   return (dispatch) => {
     dispatch(fetchUserRequest())
     return Spotify.getUser()
-    .then((res) => dispatch(fetchUserSuccess(res.items)))
+    .then((res) => dispatch(fetchUserSuccess(res)))
     .catch((err) => dispatch(fetchUserFailure(err.message)))
   }
 }

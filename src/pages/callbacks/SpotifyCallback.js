@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetchUser } from '../../store/actions/spotify'
 
 const SpotifyCallback = () => {
 
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.spotifyUser)
+  // const { data, loading, error } = useSelector((state) => state.spotifyUser)
 
   useEffect(() => {
     const hash = window.location.hash.substring(1).split("&").reduce(function(initial, item) {
@@ -16,17 +16,16 @@ const SpotifyCallback = () => {
       return initial;
     }, {});
 
+    dispatch(fetchUser())
+
     if (hash.access_token) {
       localStorage.setItem('spotify_accessToken', hash.access_token);
     }
 
-
-
     if(hash.access_token && hash.state) {
-      // window.location.replace('/');
+      window.location.replace('/');
     }
 
-    dispatch(fetchUser())
   }, [dispatch]);
 
   return (
