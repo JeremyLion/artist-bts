@@ -10,7 +10,9 @@ const spotifyPlaylistReducer = (state = init, action) => {
   switch (action.type) {
     case FETCH_PLAYLIST_REQUEST :
       return {
-         ...state, loading: true 
+         ...state,
+         error: null, 
+         loading: true 
       }
     case FETCH_PLAYLIST_SUCCESS :
       const filterPlaylist = action.data.filter((x) => x.tracks.total !== 0)
